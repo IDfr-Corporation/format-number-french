@@ -20,6 +20,7 @@ module.exports = formatNumber;
  */
 function formatNumber(value, options) {
     options = options || {};
+    value += ''; // must be String Type
 
     // not a number !!
     if (!__isNumber(value)) {
