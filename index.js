@@ -27,10 +27,28 @@ function formatNumber(value, options) {
     }
 
     var valueArr = __splitValue(value),
+        integer = valueArr[0],
         formattedValue;
 
-    valueArr[0] = __addSpacesSeparator(valueArr[0]);
-    formattedValue = valueArr.join(',');
+    if (options.reduce) {
+        if (integer >= 100000 && integer <= 999999) {
+            options.suffix = 'k' + options.suffix;
+            integer = integer.slice(0, -3);
+        } else if (integer > 999999 && integer <= 999999999) {
+            options.suffix = 'M' + options.suffix;
+            integer = integer.slice(0, -6);
+        } else if (integer > 999999999) {
+            options.suffix = 'Mrd' + options.suffix;
+            integer = integer.slice(0, -9);
+        }
+
+        // add spaces
+        formattedValue = __addSpacesSeparator(integer);
+    } else {
+        // add spaces
+        valueArr[0] = __addSpacesSeparator(integer);
+        formattedValue = valueArr.join(',');
+    }
 
     if (options.suffix) {
         formattedValue += ' ' + options.suffix;

@@ -23,10 +23,23 @@ describe('Format-number-french Tests', function () {
 
     it('Decimal number is well formatted', function () {
         assert.equal(formatNumber('1234567'), '1 234 567', 'fail to format a integer number');
-        assert.equal(formatNumber('1234567,5678'), '1 234 567,5678', 'fail to format a decimal number');
+        assert.equal(formatNumber('1234567,5678'), '1 234 567,5678', 'fails to format a decimal number');
     });
 
     it('It add a suffix €', function () {
-        assert.equal(formatNumber('1234567,5678', {suffix: '€'}), '1 234 567,5678 €', 'fail to add a suffix');
-    })
+        assert.equal(formatNumber('1234567,5678', {suffix: '€'}), '1 234 567,5678 €', 'fails to add a suffix');
+    });
+
+    describe('if reduce option exits...', function () {
+        it('it formats value with kilo suffix if 100 000 < number < 999 999', function () {
+            assert.equal(formatNumber('234567,5678', {suffix: '€', reduce: true}), '234 k€');
+            assert.notEqual(formatNumber('99999,5678', {suffix: '€', reduce: true}), '99 k€');
+        });
+        it('it formats value with Mega suffix if 1 000 000 < number < 999 999 999', function () {
+            assert.equal(formatNumber('444234567,5678', {suffix: '€', reduce: true}), '444 M€');
+        });
+        it('it formats value with Mrd suffix if 999 999 999 < number', function () {
+            assert.equal(formatNumber('33444234567,5678', {suffix: '€', reduce: true}), '33 Mrd€');
+        });
+    });
 });
