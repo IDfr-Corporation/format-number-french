@@ -19,6 +19,6 @@ returned value : 27 341 123,54 €
 reduce number by adding a suffix of kilo (k), million (M) or billion (Mrd) depending of the value
 ```
 var formattedNumber = formatNumber("27341123,54", {suffix: "€", reduce: true});
-returned value :  27 M€
+returned value :  27 Mio€
 ```
 

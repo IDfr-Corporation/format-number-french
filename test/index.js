@@ -35,11 +35,17 @@ describe('Format-number-french Tests', function () {
             assert.equal(formatNumber('234567,5678', {suffix: '€', reduce: true}), '234 k€');
             assert.notEqual(formatNumber('99999,5678', {suffix: '€', reduce: true}), '99 k€');
         });
-        it('it formats value with Mega suffix if 1 000 000 < number < 999 999 999', function () {
-            assert.equal(formatNumber('444234567,5678', {suffix: '€', reduce: true}), '444 M€');
+        it('it formats value with Mio suffix if 1 000 000 < number < 9 999 999', function () {
+            assert.equal(formatNumber('7234567,5678', {suffix: '€', reduce: true}), '7,2 Mio €');
         });
-        it('it formats value with Mrd suffix if 999 999 999 < number', function () {
-            assert.equal(formatNumber('33444234567,5678', {suffix: '€', reduce: true}), '33 Mrd€');
+        it('it formats value with Mio suffix if 10 000 000 < number < 9 999 999 999', function () {
+            assert.equal(formatNumber('444234567,5678', {suffix: '€', reduce: true}), '444 Mio €');
+        });
+        it('it formats value with Mrd suffix if 1 000 000 000 < number < 9 999 999 999', function () {
+            assert.equal(formatNumber('3444234567,5678', {suffix: '€', reduce: true}), '3,4 Mrd €');
+        });
+        it('it formats value with Mrd suffix if 9 999 999 999 < number', function () {
+            assert.equal(formatNumber('33444234567,5678', {suffix: '€', reduce: true}), '33 Mrd €');
         });
     });
 });

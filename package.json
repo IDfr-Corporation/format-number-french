@@ -1,6 +1,6 @@
 {
   "name": "format-number-french",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A node module that formats numbers according to french rules and add a suffix if needed.",
   "main": "index.js",
   "scripts": {

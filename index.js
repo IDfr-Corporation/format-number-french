@@ -35,11 +35,19 @@ function formatNumber(value, options) {
         if (integer >= 100000 && integer <= 999999) {
             options.suffix = 'k' + options.suffix;
             integer = integer.slice(0, -3);
-        } else if (integer > 999999 && integer <= 999999999) {
-            options.suffix = 'M' + options.suffix;
+        } else if (integer > 999999 && integer <= 9999999) {
+            options.suffix = 'Mio ' + options.suffix;
+            integer = integer.slice(0, -5);
+            integer = integer[0] + ',' + integer[1];
+        } else if (integer > 9999999 && integer <= 999999999) {
+            options.suffix = 'Mio ' + options.suffix;
             integer = integer.slice(0, -6);
-        } else if (integer > 999999999) {
-            options.suffix = 'Mrd' + options.suffix;
+        } else if (integer > 999999999 && integer <= 9999999999) {
+            options.suffix = 'Mrd ' + options.suffix;
+            integer = integer.slice(0, -8);
+            integer = integer[0] + ',' + integer[1];
+        } else if (integer > 9999999999) {
+            options.suffix = 'Mrd ' + options.suffix;
             integer = integer.slice(0, -9);
         }
 
