@@ -29,24 +29,25 @@ function formatNumber(value, options) {
 
     var valueArr = __splitValue(value),
         integer = valueArr[0],
+        negative = integer < 0,
+        absInteger = Math.abs(integer) + '',
         formattedValue;
 
     if (options.reduce) {
-        if (integer >= 100000 && integer <= 999999) {
+        if (absInteger >= 100000 && absInteger <= 999999) {
             options.prefix = 'k' + options.prefix;
             integer = integer.slice(0, -3);
-        } else if (integer > 999999 && integer <= 9999999) {
+        } else if (absInteger > 999999 && absInteger <= 9999999) {
             options.prefix = 'Mio ' + options.prefix;
-            integer = integer.slice(0, -5);
-            integer = integer[0] + ',' + integer[1];
-        } else if (integer > 9999999 && integer <= 999999999) {
+            integer = negative ? '-' + absInteger[0] + ',' + absInteger[1] : absInteger[0] + ',' + absInteger[1];
+        } else if (absInteger > 9999999 && absInteger <= 999999999) {
             options.prefix = 'Mio ' + options.prefix;
             integer = integer.slice(0, -6);
-        } else if (integer > 999999999 && integer <= 9999999999) {
+        } else if (absInteger > 999999999 && absInteger <= 9999999999) {
             options.prefix = 'Mrd ' + options.prefix;
             integer = integer.slice(0, -8);
-            integer = integer[0] + ',' + integer[1];
-        } else if (integer > 9999999999) {
+            integer = negative ? '-' + absInteger[0] + ',' + absInteger[1] : absInteger[0] + ',' + absInteger[1];
+        } else if (absInteger > 9999999999) {
             options.prefix = 'Mrd ' + options.prefix;
             integer = integer.slice(0, -9);
         }
@@ -73,7 +74,7 @@ function formatNumber(value, options) {
  * @private
  */
 function __isNumber(value) {
-    return !!value.match(/^[0-9]*,?[0-9]*$/);
+    return !!value.match(/^-?[0-9]*,?[0-9]*$/);
 }
 
 /**
