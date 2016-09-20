@@ -33,21 +33,21 @@ function formatNumber(value, options) {
 
     if (options.reduce) {
         if (integer >= 100000 && integer <= 999999) {
-            options.suffix = 'k' + options.suffix;
+            options.prefix = 'k' + options.prefix;
             integer = integer.slice(0, -3);
         } else if (integer > 999999 && integer <= 9999999) {
-            options.suffix = 'Mio ' + options.suffix;
+            options.prefix = 'Mio ' + options.prefix;
             integer = integer.slice(0, -5);
             integer = integer[0] + ',' + integer[1];
         } else if (integer > 9999999 && integer <= 999999999) {
-            options.suffix = 'Mio ' + options.suffix;
+            options.prefix = 'Mio ' + options.prefix;
             integer = integer.slice(0, -6);
         } else if (integer > 999999999 && integer <= 9999999999) {
-            options.suffix = 'Mrd ' + options.suffix;
+            options.prefix = 'Mrd ' + options.prefix;
             integer = integer.slice(0, -8);
             integer = integer[0] + ',' + integer[1];
         } else if (integer > 9999999999) {
-            options.suffix = 'Mrd ' + options.suffix;
+            options.prefix = 'Mrd ' + options.prefix;
             integer = integer.slice(0, -9);
         }
 
@@ -59,8 +59,8 @@ function formatNumber(value, options) {
         formattedValue = valueArr.join(',');
     }
 
-    if (options.suffix) {
-        formattedValue += ' ' + options.suffix;
+    if (options.prefix) {
+        formattedValue += ' ' + options.prefix;
     }
 
     return formattedValue;

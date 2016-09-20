@@ -26,26 +26,26 @@ describe('Format-number-french Tests', function () {
         assert.equal(formatNumber('1234567,5678'), '1 234 567,5678', 'fails to format a decimal number');
     });
 
-    it('It add a suffix €', function () {
-        assert.equal(formatNumber('1234567,5678', {suffix: '€'}), '1 234 567,5678 €', 'fails to add a suffix');
+    it('It add a prefix €', function () {
+        assert.equal(formatNumber('1234567,5678', {prefix: '€'}), '1 234 567,5678 €', 'fails to add a prefix');
     });
 
     describe('if reduce option exits...', function () {
-        it('it formats value with kilo suffix if 100 000 < number < 999 999', function () {
-            assert.equal(formatNumber('234567,5678', {suffix: '€', reduce: true}), '234 k€');
-            assert.notEqual(formatNumber('99999,5678', {suffix: '€', reduce: true}), '99 k€');
+        it('it formats value with kilo prefix if 100 000 < number < 999 999', function () {
+            assert.equal(formatNumber('234567,5678', {prefix: '€', reduce: true}), '234 k€');
+            assert.notEqual(formatNumber('99999,5678', {prefix: '€', reduce: true}), '99 k€');
         });
-        it('it formats value with Mio suffix if 1 000 000 < number < 9 999 999', function () {
-            assert.equal(formatNumber('7234567,5678', {suffix: '€', reduce: true}), '7,2 Mio €');
+        it('it formats value with Mio prefix if 1 000 000 < number < 9 999 999', function () {
+            assert.equal(formatNumber('7234567,5678', {prefix: '€', reduce: true}), '7,2 Mio €');
         });
-        it('it formats value with Mio suffix if 10 000 000 < number < 9 999 999 999', function () {
-            assert.equal(formatNumber('444234567,5678', {suffix: '€', reduce: true}), '444 Mio €');
+        it('it formats value with Mio prefix if 10 000 000 < number < 9 999 999 999', function () {
+            assert.equal(formatNumber('444234567,5678', {prefix: '€', reduce: true}), '444 Mio €');
         });
-        it('it formats value with Mrd suffix if 1 000 000 000 < number < 9 999 999 999', function () {
-            assert.equal(formatNumber('3444234567,5678', {suffix: '€', reduce: true}), '3,4 Mrd €');
+        it('it formats value with Mrd prefix if 1 000 000 000 < number < 9 999 999 999', function () {
+            assert.equal(formatNumber('3444234567,5678', {prefix: '€', reduce: true}), '3,4 Mrd €');
         });
-        it('it formats value with Mrd suffix if 9 999 999 999 < number', function () {
-            assert.equal(formatNumber('33444234567,5678', {suffix: '€', reduce: true}), '33 Mrd €');
+        it('it formats value with Mrd prefix if 9 999 999 999 < number', function () {
+            assert.equal(formatNumber('33444234567,5678', {prefix: '€', reduce: true}), '33 Mrd €');
         });
     });
 });
